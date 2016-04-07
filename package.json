@@ -1,0 +1,19 @@
+{
+  "name": "state-react-router",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buildo/state-react-router.git"
+  },
+  "author": "Giovanni Gonzaga <giovanni@buildo.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/buildo/state-react-router/issues"
+  },
+  "homepage": "https://github.com/buildo/state-react-router#readme"
+}
