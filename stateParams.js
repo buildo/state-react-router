@@ -50,10 +50,10 @@ export const parseParams = _order => params => {
 };
 
 export const stringifyParams = _order => params => {
-  const order = _order.concat(string);
+  const order = _order.concat(getDefaultParamTypes(_order));
 
   const _stringifyParam = value => {
-    const paramType = find(order.concat(string), p => p.matchInstance(value));
+    const paramType = find(order, p => p.matchInstance(value));
     if (paramType) {
       return paramType.stringify(value);
     } else {
