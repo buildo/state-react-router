@@ -2,12 +2,23 @@ import find from 'lodash/find';
 import identity from 'lodash/identity';
 import t from 'tcomb';
 
-const string = {
-  matchString: () => true,
-  matchInstance: t.String.is,
-  parse: identity,
-  stringify: identity
-};
+const getDefaultParamTypes = order => {
+  const json = {
+    matchString: t.Object.is,
+    matchInstance: t.Object.is,
+    parse: x => parseParams(order)(x),
+    stringify: x => JSON.stringify(x)
+  };
+
+  const string = {
+    matchString: () => true,
+    matchInstance: t.String.is,
+    parse: identity,
+    stringify: identity
+  };
+
+  return [json, string];
+}
 
 export const encodeParams = params => {
   return Object.keys(params || {}).reduce((acc, paramName) => {
@@ -19,7 +30,7 @@ export const encodeParams = params => {
 };
 
 export const parseParams = _order => params => {
-  const order = _order.concat(string);
+  const order = _order.concat(getDefaultParamTypes(_order));
 
   const parseParam = value => {
     const paramType = find(order, p => p.matchString(value));
