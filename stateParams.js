@@ -32,7 +32,7 @@ export const encodeParams = params => {
 export const parseParams = _order => params => {
   const order = _order.concat(getDefaultParamTypes(_order));
 
-  const parseParam = value => {
+  const _parseParam = value => {
     const paramType = find(order, p => p.matchString(value));
     if (paramType) {
       return paramType.parse(value);
@@ -44,7 +44,7 @@ export const parseParams = _order => params => {
   return Object.keys(params || {}).reduce((ac, paramName) => {
     return {
       ...ac,
-      [paramName]: parseParam(params[paramName])
+      [paramName]: _parseParam(params[paramName])
     };
   }, {});
 };
@@ -52,7 +52,7 @@ export const parseParams = _order => params => {
 export const stringifyParams = _order => params => {
   const order = _order.concat(string);
 
-  const stringifyParam = value => {
+  const _stringifyParam = value => {
     const paramType = find(order.concat(string), p => p.matchInstance(value));
     if (paramType) {
       return paramType.stringify(value);
@@ -64,7 +64,7 @@ export const stringifyParams = _order => params => {
   return Object.keys(params || {}).reduce((ac, paramName) => {
     return {
       ...ac,
-      [paramName]: stringifyParam(params[paramName])
+      [paramName]: _stringifyParam(params[paramName])
     };
   }, {});
 };
