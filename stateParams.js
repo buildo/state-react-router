@@ -7,7 +7,7 @@ const getDefaultParamTypes = order => {
     matchString: t.Object.is,
     matchInstance: t.Object.is,
     parse: x => parseParams(order)(x),
-    stringify: identity // if you use `JSON.stringify` `encodeURIComponent` fails to recognize it as an object and treats it as a string
+    stringify: x => stringifyParams(order)(x) // if you use `JSON.stringify` `encodeURIComponent` fails to recognize it as an object and treats it as a string
   };
 
   const string = {
