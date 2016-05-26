@@ -103,8 +103,8 @@ export default function routerDiff({
 
   function mergeStateAndBrowserState(state, parsedRouterState) {
     const merged = { ...state, ...parsedRouterState };
-    for (const k in routerStatePathParamKeys) { // eslint-disable-line no-loops/no-loops
-      if (t.Nil.is(parsedRouterState[k])) {
+    for (const k in state) { // eslint-disable-line no-loops/no-loops
+      if (t.Nil.is(parsedRouterState[k]) && ignoreParams.indexOf(k) === -1) {
         delete merged[k];
       }
     }
@@ -147,16 +147,18 @@ export default function routerDiff({
           query: router.getCurrentQuery()
         };
         const nextRouterState = {
-          state: routerDiff[0] || currentRouterState.state,
-          params: { ...currentRouterState.params, ...(routerDiff && routerDiff[1] || {}) },
-          query: { ...currentRouterState.query, ...(routerDiff && routerDiff[2] || {}) }
+          state: newState[routerStateKey] || router.getLastRouteName(),
+          params: encodeParams(stringifyParams(pick(newState, routerStatePathParamKeys))),
+          // react-router doesn't encode path params,
+          // but only query params
+          query: stringifyParams(omit(newState, [routerStateKey].concat(routerStatePathParamKeys).concat(ignoreParams)))
         };
         if (shouldRouterPatchBePushed(currentRouterState, nextRouterState)) {
-          log('pushState (transitionToPatch)');
-          router.transitionToPatch(...routerDiff);
+          log('pushState (transitionTo)', nextRouterState.state, nextRouterState.params, nextRouterState.query);
+          router.transitionTo(nextRouterState.state, nextRouterState.params, nextRouterState.query);
         } else {
-          log('replaceState (replaceWithPatch)');
-          router.replaceWithPatch(...routerDiff);
+          log('replaceState (replaceWith)');
+          router.replaceWith(nextRouterState.state, nextRouterState.params, nextRouterState.query);
         }
       }
 
