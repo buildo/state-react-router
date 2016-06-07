@@ -10,6 +10,14 @@ const getDefaultParamTypes = order => {
     stringify: x => stringifyParams(order)(x) // if you use `JSON.stringify` `encodeURIComponent` fails to recognize it as an object and treats it as a string
   };
 
+  const boolean = {
+    matchString: v => v === 'true' || v === 'false',
+    matchInstance: t.Boolean.is,
+    parse: v => v === 'true',
+    stringify: identity
+  };
+
+  // Catchall, must be last
   const string = {
     matchString: () => true,
     matchInstance: t.String.is,
@@ -17,7 +25,7 @@ const getDefaultParamTypes = order => {
     stringify: identity
   };
 
-  return [json, string];
+  return [json, boolean, string];
 }
 
 export const encodeParams = params => {
