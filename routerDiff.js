@@ -9,6 +9,23 @@ import debug from 'debug';
 
 const log = debug('state-react-router:routerDiff');
 
+function _shouldRouterPatchBePushed({
+  state: oldState, params: oldParams//, query: oldQuery
+}, {
+  state: newState, params: newParams//, query: newQuery
+}) {
+  if (newState !== null && newState !== oldState) {
+    return true;
+  }
+
+  if (newParams !== null && !shallowEqual(newParams, oldParams)) {
+    return true;
+  }
+
+  // ignoring all query params for simplicity for now (always replaced)
+  return false;
+}
+
 export default function routerDiff({
   // the state key that should be used to
   // identify the currently active view
@@ -45,7 +62,12 @@ export default function routerDiff({
   //
   // Array<ParserStringifier>
   //
-  paramsParsers = []
+  paramsParsers = [],
+
+  // optional
+  //
+  // (oldRRState, newRRState) -> Boolean
+  shouldRouterPatchBePushed = _shouldRouterPatchBePushed
 }) {
 
   const parseParams = _parseParams(paramsParsers);
@@ -109,23 +131,6 @@ export default function routerDiff({
       }
     }
     return merged;
-  }
-
-  function shouldRouterPatchBePushed({
-    state: oldState, params: oldParams//, query: oldQuery
-  }, {
-    state: newState, params: newParams//, query: newQuery
-  }) {
-    if (newState !== null && newState !== oldState) {
-      return true;
-    }
-
-    if (newParams !== null && !shallowEqual(newParams, oldParams)) {
-      return true;
-    }
-
-    // ignoring all query params for simplicity for now (always replaced)
-    return false;
   }
 
   // returns the `syncToBrowser` (documented elsewhere) function,
