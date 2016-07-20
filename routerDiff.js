@@ -67,7 +67,14 @@ export default function routerDiff({
   // optional
   //
   // (oldRRState, newRRState) -> Boolean
+  //
   shouldRouterPatchBePushed = _shouldRouterPatchBePushed
+
+  // optional
+  //
+  // String
+  //
+  magicIgnoreParam = '___k'
 }) {
 
   const parseParams = _parseParams(paramsParsers);
@@ -147,16 +154,17 @@ export default function routerDiff({
 
       if (routerDiff) {
         const currentRouterState = {
-          state: router.getLastRouteName(),
+          state: state[routerStateKey] || router.getLastRouteName(),
           params: router.getCurrentParams(),
           query: router.getCurrentQuery()
         };
+        const toOmit = [routerStateKey].concat(routerStatePathParamKeys).concat(ignoreParams).concat(magicIgnoreParam);
         const nextRouterState = {
           state: newState[routerStateKey] || router.getLastRouteName(),
           params: encodeParams(stringifyParams(pick(newState, routerStatePathParamKeys))),
           // react-router doesn't encode path params,
           // but only query params
-          query: stringifyParams(omit(newState, [routerStateKey].concat(routerStatePathParamKeys).concat(ignoreParams)))
+          query: stringifyParams(omit(newState, toOmit))
         };
         if (shouldRouterPatchBePushed(currentRouterState, nextRouterState)) {
           log('pushState (transitionTo)', nextRouterState.state, nextRouterState.params, nextRouterState.query);
