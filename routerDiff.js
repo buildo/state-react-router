@@ -68,7 +68,7 @@ export default function routerDiff({
   //
   // (oldRRState, newRRState) -> Boolean
   //
-  shouldRouterPatchBePushed = _shouldRouterPatchBePushed
+  shouldRouterPatchBePushed = _shouldRouterPatchBePushed,
 
   // optional
   //
