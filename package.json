@@ -35,5 +35,8 @@
     "eslint": "^3.14.0",
     "eslint-config-buildo": "^0.2.0",
     "smooth-release": "^6.0.0"
+  },
+  "peerDependencies": {
+    "react-router": "0.13.x"
   }
 }
