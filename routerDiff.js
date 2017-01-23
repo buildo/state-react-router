@@ -4,7 +4,7 @@ import pick from 'lodash/pick';
 import omit from 'lodash/omit';
 import { encodeParams, stringifyParams as _stringifyParams, parseParams as _parseParams } from './stateParams';
 import patchReactRouter from './patch-react-router';
-import shallowEqual from 'state/shallowEqual'; // TODO(split)
+import shallowEqual from 'buildo-state/lib/shallowEqual'; // TODO(split)
 import debug from 'debug';
 
 const log = debug('state-react-router:routerDiff');

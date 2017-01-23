@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/buildo/state-react-router/issues"
   },
-  "homepage": "https://github.com/buildo/state-react-router#readme"
+  "homepage": "https://github.com/buildo/state-react-router#readme",
+  "dependencies": {
+    "buildo-state": "^0.3.0"
+  }
 }
