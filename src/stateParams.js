@@ -6,8 +6,9 @@ const getDefaultParamTypes = order => {
   const json = {
     matchString: t.Object.is,
     matchInstance: t.Object.is,
-    parse: x => parseParams(order)(x),
-    stringify: x => stringifyParams(order)(x) // if you use `JSON.stringify` `encodeURIComponent` fails to recognize it as an object and treats it as a string
+    parse: x => parseParams(order)(x), // eslint-disable-line no-use-before-define
+    // if you use `JSON.stringify` `encodeURIComponent` fails to recognize it as an object and treats it as a string:
+    stringify: x => stringifyParams(order)(x) // eslint-disable-line no-use-before-define
   };
 
   const boolean = {
@@ -26,7 +27,7 @@ const getDefaultParamTypes = order => {
   };
 
   return [json, boolean, string];
-}
+};
 
 export const encodeParams = params => {
   return Object.keys(params || {}).reduce((acc, paramName) => {
