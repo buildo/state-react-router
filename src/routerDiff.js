@@ -41,13 +41,6 @@ export default function routerDiff({
   //
   routerStatePathParamKeys = [],
 
-  // the state keys that should be ignored
-  // when syncing to react-router (never part of location)
-  //
-  // Array<String>
-  //
-  ignoreParams = [],
-
   // custom parsers/stringifiers for stateParams
   // by default, all params are not touched (i.e. handled as strings)
   // priority: first will match, so more specific ones should go first
@@ -80,6 +73,8 @@ export default function routerDiff({
   const parseParams = _parseParams(paramsParsers);
   const stringifyParams = _stringifyParams(paramsParsers);
 
+  const omitForQuery = [magicIgnoreParam, routerStateKey].concat(routerStatePathParamKeys);
+
   function maybePatchRouter(router) {
     if (!router.makeHrefPatch) {
       patchReactRouter(router);
@@ -95,8 +90,8 @@ export default function routerDiff({
       routerStatePathParams, oldRouterStatePathParams
     ) ? routerStatePathParams : null;
 
-    const routerStateQueryParams = omit(newState, ignoreParams);
-    const oldRouterStateQueryParams = omit(oldState, ignoreParams);
+    const routerStateQueryParams = omit(newState, omitForQuery);
+    const oldRouterStateQueryParams = omit(oldState, omitForQuery);
     // this additional nil-patch ensures RR actually picks up and deletes unset query params
     // we don't care too much for path params as they are filtered anyway by route
     for (const k in oldRouterStateQueryParams) { // eslint-disable-line no-loops/no-loops
@@ -130,16 +125,6 @@ export default function routerDiff({
     });
   }
 
-  function mergeStateAndBrowserState(state, parsedRouterState) {
-    const merged = { ...state, ...parsedRouterState };
-    for (const k in state) { // eslint-disable-line no-loops/no-loops
-      if (t.Nil.is(parsedRouterState[k]) && ignoreParams.indexOf(k) === -1) {
-        delete merged[k];
-      }
-    }
-    return merged;
-  }
-
   // returns the `syncToBrowser` (documented elsewhere) function,
   // able to apply (if needed) a given transition to router/location.
   // router should be a react-router@0.13 instance
@@ -158,13 +143,12 @@ export default function routerDiff({
           params: router.getCurrentParams(),
           query: router.getCurrentQuery()
         };
-        const toOmit = [routerStateKey].concat(routerStatePathParamKeys).concat(ignoreParams).concat(magicIgnoreParam);
         const nextRouterState = {
           state: newState[routerStateKey] || router.getLastRouteName(),
           params: encodeParams(stringifyParams(pick(newState, routerStatePathParamKeys))),
           // react-router doesn't encode path params,
           // but only query params
-          query: stringifyParams(omit(newState, toOmit))
+          query: stringifyParams(omit(newState, omitForQuery))
         };
         if (shouldRouterPatchBePushed(currentRouterState, nextRouterState)) {
           log('pushState (transitionTo)', nextRouterState.state, nextRouterState.params, nextRouterState.query);
@@ -201,7 +185,6 @@ export default function routerDiff({
 
   return {
     makeSyncToBrowser,
-    makeOnBrowserChange,
-    mergeStateAndBrowserState
+    makeOnBrowserChange
   };
 }
