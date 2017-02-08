@@ -1,7 +1,16 @@
 #  Change Log
 
-## [Unreleased](https://github.com/buildo/state-react-router/tree/HEAD)
-[Full Changelog](https://github.com/buildo/state-react-router/compare/v0.2.0...HEAD)
+
+
+## [v0.4.0](https://github.com/buildo/state-react-router/tree/v0.4.0) (2017-02-08)
+[Full Changelog](https://github.com/buildo/state-react-router/compare/v0.3.0...v0.4.0)
+
+#### Breaking:
+
+- remove "ignoreParams" filtering logic [#11](https://github.com/buildo/state-react-router/issues/11)
+
+## [v0.3.0](https://github.com/buildo/state-react-router/tree/v0.3.0) (2017-01-23)
+[Full Changelog](https://github.com/buildo/state-react-router/compare/v0.2.0...v0.3.0)
 
 #### Breaking:
 
