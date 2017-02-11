@@ -2,6 +2,9 @@
 
 
 
+## [v0.4.1](https://github.com/buildo/state-react-router/tree/v0.4.1) (2017-02-11)
+[Full Changelog](https://github.com/buildo/state-react-router/compare/v0.4.0...v0.4.1)
+
 ## [v0.4.0](https://github.com/buildo/state-react-router/tree/v0.4.0) (2017-02-08)
 [Full Changelog](https://github.com/buildo/state-react-router/compare/v0.3.0...v0.4.0)
 
