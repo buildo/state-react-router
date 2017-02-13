@@ -2,6 +2,13 @@
 
 
 
+## [v0.4.2](https://github.com/buildo/state-react-router/tree/v0.4.2) (2017-02-13)
+[Full Changelog](https://github.com/buildo/state-react-router/compare/v0.4.1...v0.4.2)
+
+#### Fixes (bugs & defects):
+
+- fix `magicIgnoreParam` regression from #11 [#13](https://github.com/buildo/state-react-router/issues/13)
+
 ## [v0.4.1](https://github.com/buildo/state-react-router/tree/v0.4.1) (2017-02-11)
 [Full Changelog](https://github.com/buildo/state-react-router/compare/v0.4.0...v0.4.1)
 
