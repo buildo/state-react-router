@@ -73,7 +73,7 @@ export default function routerDiff({
   const parseParams = _parseParams(paramsParsers);
   const stringifyParams = _stringifyParams(paramsParsers);
 
-  const omitForQuery = [magicIgnoreParam, routerStateKey].concat(routerStatePathParamKeys);
+  const omitForQuery = [routerStateKey].concat(routerStatePathParamKeys);
 
   function maybePatchRouter(router) {
     if (!router.makeHrefPatch) {
@@ -148,7 +148,7 @@ export default function routerDiff({
           params: encodeParams(stringifyParams(pick(newState, routerStatePathParamKeys))),
           // react-router doesn't encode path params,
           // but only query params
-          query: stringifyParams(omit(newState, omitForQuery))
+          query: stringifyParams(omit(newState, omitForQuery.concat(magicIgnoreParam)))
         };
         if (shouldRouterPatchBePushed(currentRouterState, nextRouterState)) {
           log('pushState (transitionTo)', nextRouterState.state, nextRouterState.params, nextRouterState.query);
