@@ -1,6 +1,6 @@
 {
   "name": "buildo-state-react-router",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "buildo-state bindings to react-router v0.13.x",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
