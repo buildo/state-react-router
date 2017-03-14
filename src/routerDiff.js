@@ -152,10 +152,14 @@ export default function routerDiff({
         };
         if (shouldRouterPatchBePushed(currentRouterState, nextRouterState)) {
           log('pushState (transitionTo)', nextRouterState.state, nextRouterState.params, nextRouterState.query);
-          router.transitionTo(nextRouterState.state, nextRouterState.params, nextRouterState.query);
+          setTimeout(
+            router.transitionTo.bind(router, nextRouterState.state, nextRouterState.params, nextRouterState.query)
+          );
         } else {
           log('replaceState (replaceWith)');
-          router.replaceWith(nextRouterState.state, nextRouterState.params, nextRouterState.query);
+          setTimeout(
+            router.replaceWith.bind(router, nextRouterState.state, nextRouterState.params, nextRouterState.query)
+          );
         }
       }
 
