@@ -2,6 +2,14 @@
 
 
 
+## [v0.4.3](https://github.com/buildo/state-react-router/tree/v0.4.3) (2017-03-14)
+[Full Changelog](https://github.com/buildo/state-react-router/compare/v0.4.2...v0.4.3)
+
+#### New features:
+
+- backport react-state-router [#15](https://github.com/buildo/state-react-router/issues/15)
+- enforce an async "syncToBrowser" behavior even for HistoryLocation [#8](https://github.com/buildo/state-react-router/issues/8)
+
 ## [v0.4.2](https://github.com/buildo/state-react-router/tree/v0.4.2) (2017-02-13)
 [Full Changelog](https://github.com/buildo/state-react-router/compare/v0.4.1...v0.4.2)
 
