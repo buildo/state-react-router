@@ -10,9 +10,9 @@ import debug from 'debug';
 const log = debug('state-react-router:routerDiff');
 
 function _shouldRouterPatchBePushed({
-  state: oldState, params: oldParams//, query: oldQuery
+  state: oldState, params: oldParams // , query: oldQuery
 }, {
-  state: newState, params: newParams//, query: newQuery
+  state: newState, params: newParams // , query: newQuery
 }) {
   if (newState !== null && newState !== oldState) {
     return true;
