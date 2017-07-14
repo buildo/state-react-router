@@ -2,6 +2,17 @@
 
 
 
+## [v0.5.0](https://github.com/buildo/state-react-router/tree/v0.5.0) (2017-07-14)
+[Full Changelog](https://github.com/buildo/state-react-router/compare/v0.4.3...v0.5.0)
+
+#### Breaking:
+
+- bump buildo-state version [#20](https://github.com/buildo/state-react-router/issues/20)
+
+#### New features:
+
+- use scriptoni for linting [#18](https://github.com/buildo/state-react-router/issues/18)
+
 ## [v0.4.3](https://github.com/buildo/state-react-router/tree/v0.4.3) (2017-03-14)
 [Full Changelog](https://github.com/buildo/state-react-router/compare/v0.4.2...v0.4.3)
 
