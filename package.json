@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/buildo/state-react-router#readme",
   "dependencies": {
-    "buildo-state": "^0.4.0"
+    "buildo-state": "^0.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
